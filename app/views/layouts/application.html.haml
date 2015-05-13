@@ -8,4 +8,27 @@
     = javascript_include_tag 'application'
     = csrf_meta_tags
   %body
-    = yield
+    #header
+      #flash-messages
+        - if flash[:notice]
+          #flash-notice.alert.alert-success.text-center.fade.in
+            %button.close{type: "button", data: {dismiss: 'alert'}} &times;
+            = flash[:notice]
+
+        - if flash[:error]
+          #flash-error.alert.alert-danger.text-center.fade.in
+            %button.close{type: "button", data: {dismiss: 'alert'}} &times;
+            = flash[:error]
+
+        - if flash[:alert]
+          #flash-alert.alert.alert-warning.text-center.fade.in
+            %button.close{type: "button", data: {dismiss: 'alert'}} &times;
+            =flash[:alert]
+      #logo
+        %h1 BLOCIPEDIA
+        
+    #content
+      = yield
+
+    #side-bar
+      Hello

@@ -1,0 +1,17 @@
+%h2 Sign Up
+= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+  #form-messages
+    = devise_error_messages!
+  = form_group_tag(resource.errors[:email], false) do
+    = f.label :email
+    = f.email_field :email, autofocus: true, class: 'form-control'
+    
+  = form_group_tag(resource.errors[:password], false) do
+    = f.label :password
+    = f.password_field :password, autocomplete: "off", class: 'form-control'
+    %span.help-block Minimum password length is #{@minimum_password_length} characters
+    
+  = f.submit "Sign Up", class: 'btn btn-success'
+
+.sign-up-extra-links
+  = render "devise/shared/links"

@@ -1,6 +1,9 @@
 %h1 Account Settings
 
 = form_for @user, url: user_registration_path do |f|
+  #error-messages
+    = display_form_errors!(@user)
+    
   = form_group_tag(@user.errors[:username], false) do
     = f.label :username
     = f.text_field :username, class: 'form-control'

@@ -1,6 +1,7 @@
 form#new_user #user_email,
 form#new_user #user_password,
-form#new_user #form-messages{
+form#new_user #form-messages,
+form.edit_user{
   width: 350px;
 }
 

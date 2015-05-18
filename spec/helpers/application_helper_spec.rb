@@ -18,7 +18,7 @@ describe ApplicationHelper do
       allow(helper).to receive(:user_signed_in?).and_return(true)
       allow(helper).to receive(:current_user).and_return(user)
       
-      expected_output = "Welcome " + user.email + ' | ' +
+      expected_output = "Welcome " + link_to(user.email, edit_user_registration_path) + ' | ' +
         link_to("Log Out", destroy_user_session_path, method: :delete)
       
       expect(helper.account_links).to eq(expected_output)
@@ -28,7 +28,7 @@ describe ApplicationHelper do
       allow(helper).to receive(:user_signed_in?).and_return(true)
       allow(helper).to receive(:current_user).and_return(user_with_username)
       
-      expected_output = "Welcome " + user_with_username.username + ' | ' +
+      expected_output = "Welcome " + link_to(user_with_username.username, edit_user_registration_path) + ' | ' +
         link_to("Log Out", destroy_user_session_path, method: :delete)
       
       expect(helper.account_links).to eq(expected_output)

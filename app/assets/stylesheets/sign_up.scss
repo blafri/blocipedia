@@ -1,0 +1,9 @@
+form#new_user #user_email,
+form#new_user #user_password,
+form#new_user #form-messages{
+  width: 350px;
+}
+
+.sign-up-extra-links {
+  margin-top: 15px;
+}

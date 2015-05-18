@@ -1,0 +1,18 @@
+%h1 Account Settings
+
+= form_for @user, url: user_registration_path do |f|
+  = form_group_tag(@user.errors[:username], false) do
+    = f.label :username
+    = f.text_field :username, class: 'form-control'
+    
+  = form_group_tag(@user.errors[:email], false) do
+    = f.label :email
+    = f.email_field :email, class: 'form-control'
+    
+  .form-group
+    %label{for: "reset-pass-link"} Reset Password:
+    %br/
+    = link_to "Send Password Reset Email", reset_user_password_path, id: "reset-pass-link", class: "btn btn-warning", method: :post
+    
+  .form-grouo
+    = f.submit "Update Account", class: "btn btn-success"

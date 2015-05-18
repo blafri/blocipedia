@@ -21,7 +21,7 @@ feature "Sign up" do
     scenario "is successfull and email is sent" do
       fill_in 'user_email', with: email
       fill_in 'user_password', with: password
-      click_on "Sign Up"
+      click_button "Sign Up"
       
       expect(current_path).to eq(root_path)
       expect(page).to have_content('A message with a confirmation link has been sent to your email address. Please follow the link to activate your account')
@@ -34,7 +34,7 @@ feature "Sign up" do
     scenario "email address fails" do
       fill_in 'user_email', with: invalid_email
       fill_in 'user_password', with: password
-      click_on "Sign Up"
+      click_button "Sign Up"
       
       expect(page).to have_content('Email is invalid')
       expect(ActionMailer::Base.deliveries.count).to eq(0)
@@ -44,7 +44,7 @@ feature "Sign up" do
     scenario "password (password too short) fails" do
       fill_in 'user_email', with: email
       fill_in 'user_password', with: invalid_password
-      click_on "Sign Up"
+      click_button "Sign Up"
       
       expect(page).to have_content('Password is too short')
       expect(ActionMailer::Base.deliveries.count).to eq(0)
@@ -55,7 +55,7 @@ feature "Sign up" do
   context "with missing" do
     scenario "email address fails" do
       fill_in 'user_password', with: password
-      click_on "Sign Up"
+      click_button "Sign Up"
       
       expect(page).to have_content('Email can\'t be blank')
       expect(ActionMailer::Base.deliveries.count).to eq(0)
@@ -64,7 +64,7 @@ feature "Sign up" do
     
     scenario "password fails" do
       fill_in 'user_email', with: email
-      click_on "Sign Up"
+      click_button "Sign Up"
       
       expect(page).to have_content('Password can\'t be blank')
       expect(ActionMailer::Base.deliveries.count).to eq(0)
@@ -78,7 +78,7 @@ feature "Sign up" do
     
     fill_in 'user_email', with: email
     fill_in 'user_password', with: password
-    click_on "Sign Up"
+    click_button "Sign Up"
     
     expect(page).to have_content('Email has already been taken')
     expect(ActionMailer::Base.deliveries.count).to eq(0)

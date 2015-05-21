@@ -1,0 +1,41 @@
+// Place all the styles related to the Wikis controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+form #wiki_title {
+  width: 350px;
+}
+
+#wiki-nav {
+  position: absolute;
+  top: 48px;
+  right: 20px;
+  
+}
+
+#wiki-nav li {
+  display: block;
+  float: left;
+  width: 60px;
+  text-align: center;
+  border: 1px solid #a7d7f9;
+  margin-left: 5px;
+}
+
+#wiki-nav li.active {
+  border-bottom: 1px solid #FFF;
+  background-color: #FFF;
+}
+
+#wiki-header {
+  margin-bottom: 20px;
+}
+
+#wiki-title {
+  margin-top: 0;
+  border-bottom: 1px solid #CCC;
+  margin-bottom: 2px;
+}
+
+#error-messages {
+  width: 350px;
+}

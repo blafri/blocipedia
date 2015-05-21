@@ -1,0 +1,8 @@
+= render partial: 'wiki_links', locals: { wiki: @wiki }
+#wiki-header
+  %h1#wiki-title= @wiki.title
+  %p
+    %small Created by #{wiki_creator(@wiki)}
+  
+#wiki-content
+  = @wiki.body

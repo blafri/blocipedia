@@ -1,0 +1,14 @@
+= form_for wiki do |f|
+  #error-messages
+    = display_form_errors!(wiki)
+    
+  = form_group_tag(wiki.errors[:title], false) do
+    = f.label :title
+    = f.text_field :title, placeholder: 'Wiki Title.', class: 'form-control'
+    
+  = form_group_tag(wiki.errors[:body], false) do
+    = f.label :body
+    = f.text_area :body, placeholder: 'Wiki content.', rows: 10, class: 'form-control'
+    
+  .form-group
+    = f.submit wiki_submit_text(params[:action]), class: 'btn btn-success'

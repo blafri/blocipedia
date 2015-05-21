@@ -41,4 +41,12 @@ START
     
     html.html_safe
   end
+  
+  def is_link_active(link_path)
+    if current_page?(link_path)
+      return 'active'
+    else
+      return ''
+    end
+  end
 end

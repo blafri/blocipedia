@@ -12,14 +12,4 @@ RSpec.describe WikisHelper, type: :helper do
       expect(helper.wiki_creator(wiki)).to eq(wiki.user.email)
     end
   end
-  
-  context "#wiki_submit_text" do
-    scenario "when creating a wiki is correct" do
-      expect(helper.wiki_submit_text('new')).to eq('Create Wiki')
-    end
-    
-    scenario "when updating a wiki is correct" do
-      expect(helper.wiki_submit_text('edit')).to eq('Update Wiki')
-    end
-  end
 end

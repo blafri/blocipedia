@@ -6,13 +6,4 @@ module WikisHelper
       wiki.user.email
     end
   end
-  
-  def wiki_submit_text(action)
-    case action
-    when "new"
-      "Create Wiki"
-    when "edit"
-      "Update Wiki"
-    end
-  end
 end

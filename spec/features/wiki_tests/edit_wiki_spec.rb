@@ -13,7 +13,7 @@ feature "Edit wiki" do
       
       # We will try to change the body of the wiki
       fill_in 'wiki_body', with: 'I am changing the body'
-      click_button 'Update Wiki'
+      click_button 'Update'
       
       expect(page).to have_content('Wiki updated successfully')
       expect(Wiki.find(wiki.id).body).to eq('I am changing the body')
@@ -25,7 +25,7 @@ feature "Edit wiki" do
       
       # We will try to change the body of the wiki
       fill_in 'wiki_body', with: 'I am changing the body'
-      click_button 'Update Wiki'
+      click_button 'Update'
       
       expect(page).to have_content('Wiki updated successfully')
       expect(Wiki.find(wiki.id).body).to eq('I am changing the body')

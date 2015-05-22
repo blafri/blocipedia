@@ -10,7 +10,7 @@ feature "Create a wiki" do
       visit new_wiki_path
       fill_in 'wiki_title', with: 'Test Wiki'
       fill_in 'wiki_body', with: 'This is just a test wiki'
-      click_button 'Create Wiki'
+      click_button 'Save'
       
       expect(page).to have_content("New wiki successfully created.")
       expect(page).to have_content('Test Wiki')
@@ -28,7 +28,7 @@ feature "Create a wiki" do
       sign_in_user(user)
       visit new_wiki_path
       fill_in 'wiki_body', with: 'This is just a test wiki'
-      click_button 'Create Wiki'
+      click_button 'Save'
       
       expect(page).to have_content('There was a problem saving your new wiki. Please try again.')
       expect(page).to have_content("Title can't be blank")
@@ -39,7 +39,7 @@ feature "Create a wiki" do
       sign_in_user(user)
       visit new_wiki_path
       fill_in 'wiki_title', with: 'Wiki title'
-      click_button 'Create Wiki'
+      click_button 'Save'
       
       expect(page).to have_content('There was a problem saving your new wiki. Please try again.')
       expect(page).to have_content("Body can't be blank")

@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   devise_scope :user do
     post 'users/password/reset', to: 'users#password_reset', as: :reset_user_password
   end
+  
+  resources :wikis
 end

@@ -38,6 +38,7 @@ gem 'rails_12factor', group: [:production, :development]
 gem 'puma'
 gem "rack-timeout"
 gem "devise", "~> 3.4.0"
+gem 'pundit', "~> 1.0.0"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -51,5 +52,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'capybara'
   gem "factory_girl_rails", "~> 4.0"
+  gem 'shoulda-matchers'
+  gem 'pry'
 end
 

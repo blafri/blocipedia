@@ -34,4 +34,6 @@
       = yield
 
     #side-bar
-      Hello
+      %p Main Menu
+      %p= link_to "Create a New Wiki", new_wiki_path
+      %p= link_to "List of wikis", wikis_path

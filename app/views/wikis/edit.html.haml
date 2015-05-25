@@ -1,0 +1,4 @@
+= render partial: 'wiki_links', locals: { wiki: @wiki }
+%h1 Update wiki "#{@wiki.title}"
+
+= render partial: 'form', locals: { wiki: @wiki }

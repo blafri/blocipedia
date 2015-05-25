@@ -34,4 +34,16 @@ describe ApplicationHelper do
       expect(helper.account_links).to eq(expected_output)
     end
   end
+  
+  context "#is_link_active" do
+    scenario "returns active if link is current link" do
+      allow(helper).to receive(:current_page?).and_return(true)
+      expect(helper.is_link_active('/test/link')).to eq('active')
+    end
+    
+    scenario "returns and empty string if current link is not active" do
+      allow(helper).to receive(:current_page?).and_return(false)
+      expect(helper.is_link_active('/test/link')).to eq('')
+    end
+  end
 end

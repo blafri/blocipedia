@@ -13,6 +13,11 @@
     = f.email_field :email, class: 'form-control'
     
   .form-group
+    %label{for: "upgrade-account-link"} Account Status: #{@user.role.capitalize}
+    %br
+    = account_upgrade_link(@user)
+  
+  .form-group
     %label{for: "reset-pass-link"} Reset Password:
     %br/
     = link_to "Send Password Reset Email", reset_user_password_path, id: "reset-pass-link", class: "btn btn-warning", method: :post

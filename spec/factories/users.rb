@@ -7,5 +7,9 @@ FactoryGirl.define do
     factory :user_with_username do
       sequence(:username) { |n| "person#{n}" }
     end
+    
+    factory :premium_user do
+      role 'premium'
+    end
   end
 end

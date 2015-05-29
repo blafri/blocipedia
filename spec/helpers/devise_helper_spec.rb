@@ -7,7 +7,7 @@ RSpec.describe DeviseHelper, type: :helper do
   context "#account_upgrade_link" do
     scenario "displays correct link for premium user" do
       expect(helper.account_upgrade_link(premium_user)).
-        to eq("<a class=\"btn btn-success\" id=\"upgrade-account-link\" rel=\"nofollow\" data-method=\"post\" href=\"#{upgrade_refund_path}\">Downgrade Account</a>")
+        to eq("<a class=\"btn btn-success\" id=\"upgrade-account-link\" rel=\"nofollow\" data-method=\"post\" href=\"#{refund_path}\">Downgrade Account</a>")
     end
     
     scenario "displays correct link for standard user" do

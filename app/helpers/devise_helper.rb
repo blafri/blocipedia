@@ -28,7 +28,7 @@ HTML
     if user.role == 'standard'
       link_to 'Upgrade Account', upgrade_path, class: 'btn btn-success', id: 'upgrade-account-link'
     elsif user.role == 'premium'
-      link_to 'Downgrade Account', upgrade_refund_path, class: 'btn btn-success', id: 'upgrade-account-link', method: :post
+      link_to 'Downgrade Account', refund_path, class: 'btn btn-success', id: 'upgrade-account-link', method: :post
     end
   end
 end

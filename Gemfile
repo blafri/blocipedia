@@ -56,5 +56,7 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'faker'
   gem 'pry'
+  gem 'poltergeist'
+  gem 'database_cleaner'
 end
 

@@ -1,0 +1,30 @@
+table#price-list,
+#price-list th,
+#price-list td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+table#price-list {
+  
+  th {
+    text-align: center;
+  }
+  
+  .col1 {
+    width: 500px;
+  }
+  
+  .col2 {
+    width: 100px;
+  }
+  
+  .total-header {
+    text-align: right;
+    padding-right: 10px;
+  }
+}
+
+#payment-button {
+  margin-top: 25px;
+}

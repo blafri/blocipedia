@@ -8,10 +8,7 @@ Rails.application.routes.draw do
   
   resources :wikis
   
-  # routes for account upgrades using paypal
-  get "upgrade", to: "charges#index"
-  post "upgrade", to: "charges#create"
-  get "upgrade/confirm_payment", to: "charges#confirm_payment"
-  post "upgrade/confirm_payment", to: "charges#make_payment"
-  post "upgrade/refund", to: "charges#refund_payment"
+  resource :charge, only: [:new, :create]
+  resource :refund, only: :create
+  resource :upgrade, only: :show
 end

@@ -2,8 +2,10 @@ class WikisController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
   after_action :verify_authorized, except: :index
   
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  
   def index
-    @wikis = Wiki.all
+    @wikis = Wiki.wikis_visable_to(current_user)
   end
   
   def new
@@ -63,6 +65,14 @@ class WikisController < ApplicationController
   private
   
   def wiki_params
-    params.require(:wiki).permit(:title, :body)
+    params.require(:wiki).permit(:title, :body, :private)
+  end
+  
+  def user_not_authorized(exception)
+    if exception.query == "show?"
+      flash[:error] = "You must be logged in to view this private wiki"
+      store_location_for(:user, wiki_path(exception.record))
+      redirect_to new_user_session_path
+    end
   end
 end

@@ -5,4 +5,12 @@ class User < ActiveRecord::Base
     :recoverable, :rememberable, :trackable, :validatable, :confirmable
   
   has_many :wikis, dependent: :destroy
+  
+  def create_private_wikis?
+    if role == 'admin' || role == 'premium'
+      true
+    else
+      false
+    end
+  end
 end

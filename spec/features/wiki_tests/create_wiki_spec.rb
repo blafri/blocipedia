@@ -3,6 +3,35 @@ require 'support/sign_in_user'
 
 feature "Create a wiki" do
   let(:user) { create(:user) }
+  let(:premium_user) { create(:premium_user) }
+  
+  context "private wiki" do
+    context "make wiki private checkbox" do
+      scenario "is not visable for standard users" do
+        sign_in_user(user)
+        visit new_wiki_path
+        expect(page).not_to have_content('Make Wiki Private')
+      end
+
+      scenario "is visable for premium users" do
+        sign_in_user(premium_user)
+        visit new_wiki_path
+        expect(page).to have_content('Make Wiki Private')
+      end
+      
+      scenario "can be created successfully" do
+        sign_in_user(premium_user)
+        visit new_wiki_path
+        fill_in 'wiki_title', with: 'Test wiki'
+        fill_in 'wiki_body', with: "This is just a test wiki"
+        check 'wiki_private'
+        click_button 'Save'
+        
+        expect(page).to have_content("New wiki successfully created.")
+        expect(Wiki.first.private).to eq(true)
+      end
+    end
+  end
   
   context "is successful" do
     scenario "when logged in" do

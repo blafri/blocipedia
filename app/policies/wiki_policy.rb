@@ -1,4 +1,8 @@
 class WikiPolicy < ApplicationPolicy
+  def show?
+    scope.where(:id => record.id).exists? && (user.present? || !record.private)
+  end
+  
   def create?
     user.present?
   end

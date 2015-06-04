@@ -52,14 +52,14 @@ START
   
   # Public: This methods users the redcarpet gem to parse markdown text to HTML
   #
-  # markdown_text - String containg the markdown do be converted to html
+  # markdown_text - String containing the markdown do be converted to html
   #
   # Examples
   #
   #   markdown_to_html('# This is a title')
   #   # => <h1>This is a title</h1>
   #
-  # Returns a String containg the html generated from the markdown text
+  # Returns a String containing the html generated from the markdown text
   def markdown_to_html(markdown_text)
     renderer = Redcarpet::Render::HTML.new(
       escape_html: true,
@@ -75,6 +75,6 @@ START
       underline: true,
       highlight: true)
     
-    (redcarpet.render markdown_text).html_safe
+    redcarpet.render(markdown_text).html_safe
   end
 end

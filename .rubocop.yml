@@ -1,0 +1,15 @@
+AllCops:
+  RunRailsCops: true
+
+  Exclude:
+    - 'bin/**/*'
+    - 'db/schema.rb'
+    - 'db/migrate/20150513150237_devise_create_users.rb'
+    - 'db/seeds.rb'
+    - 'spec/spec_helper.rb'
+    - 'config/application.rb'
+    - 'config/initializers/backtrace_silencers.rb'
+    - 'config/initializers/devise.rb'
+    - 'config/initializers/wrap_parameters.rb'
+    - 'config/initializers/assets.rb'
+    - 'config/environments/**/*'

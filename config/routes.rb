@@ -7,4 +7,8 @@ Rails.application.routes.draw do
   end
   
   resources :wikis
+  
+  resource :charge, only: [:new, :create]
+  resource :refund, only: :create
+  resource :upgrade, only: :show
 end

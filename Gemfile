@@ -39,6 +39,7 @@ gem 'puma'
 gem "rack-timeout"
 gem "devise", "~> 3.4.0"
 gem 'pundit', "~> 1.0.0"
+gem 'paypal-sdk-rest'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -55,5 +56,7 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'faker'
   gem 'pry'
+  gem 'poltergeist'
+  gem 'database_cleaner'
 end
 

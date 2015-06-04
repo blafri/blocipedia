@@ -20,7 +20,7 @@ class Wiki < ActiveRecord::Base
   #   # => ['Array of wikis ', 'that the user has ', 'access to']
   #
   # Returns an Array of wiki objects that the user can view
-  scope :wikis_visable_to, -> (user) { user ? all : where(private: false) }
+  scope :wikis_visable_to, -> (user) { user.class == User ? all : where(private: false) }
   
   # Public: Gets a list of all wikis that are private for the passed in user.
   #
@@ -42,10 +42,9 @@ class Wiki < ActiveRecord::Base
   #
   #   Wiki.user_wikis_to_public(user)
   #
-  # Returns an Array of wikis that were changed to public
+  # Returns true if successful or false if unsuccessful
   def self.user_wikis_to_public(user)
-    wikis = list_private_wikis_for(user)
-    wikis.each { |wiki| wiki.update(private: false) }
+    list_private_wikis_for(user).update_all(private: false)
   end
   
   private
@@ -53,7 +52,7 @@ class Wiki < ActiveRecord::Base
   # Internal: Validates that only premium or admin users can create private
   #           wikis 
   def private_wiki_cannot_be_created_by_standard_users
-    if private == true && user.create_private_wikis? == false
+    if self.private == true && user.create_private_wikis? == false
       errors.add(:private, "wikis cannot be created by a standard user")
     end
   end

@@ -3,14 +3,10 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable, :confirmable
-  
+
   has_many :wikis, dependent: :destroy
-  
+
   def create_private_wikis?
-    if role == 'admin' || role == 'premium'
-      true
-    else
-      false
-    end
+    %w(admin premium).include?(role)
   end
 end

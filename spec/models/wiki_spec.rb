@@ -57,7 +57,7 @@ RSpec.describe Wiki, type: :model do
   context "Wiki#user_wikis_to_public" do
     it "changes all of a users private wikis to public wikis" do
       private_wiki = create(:private_wiki, user: premium_user)
-      expect(Wiki.user_wikis_to_public(premium_user).count).to eq(1)
+      Wiki.user_wikis_to_public(premium_user)
       expect(Wiki.first.private).to eq(false)
     end
   end

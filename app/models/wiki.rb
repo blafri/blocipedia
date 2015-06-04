@@ -20,7 +20,7 @@ class Wiki < ActiveRecord::Base
   #   # => ['Array of wikis ', 'that the user has ', 'access to']
   #
   # Returns an Array of wiki objects that the user can view
-  scope :wikis_visable_to, -> (user) { user.class == User ? all : where(private: false) }
+  scope :wikis_visable_to, -> (user) { user.is_a?(User) ? all : where(private: false) }
   
   # Public: Gets a list of all wikis that are private for the passed in user.
   #

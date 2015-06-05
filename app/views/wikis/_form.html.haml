@@ -9,6 +9,13 @@
   = form_group_tag(wiki.errors[:body], false) do
     = f.label :body
     = f.text_area :body, placeholder: 'Wiki content.', rows: 10, class: 'form-control'
+   
+  - if current_user.create_private_wikis?
+    .form-group
+      .checkbox
+        = f.label :private do
+          = f.check_box :private
+          Make Wiki Private
     
   .form-group
     = f.submit class: 'btn btn-success'

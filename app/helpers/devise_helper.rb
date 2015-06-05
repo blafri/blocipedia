@@ -28,7 +28,8 @@ HTML
     if user.role == 'standard'
       link_to 'Upgrade Account', upgrade_path, class: 'btn btn-success', id: 'upgrade-account-link'
     elsif user.role == 'premium'
-      link_to 'Downgrade Account', refund_path, class: 'btn btn-success', id: 'upgrade-account-link', method: :post
+      link_to 'Downgrade Account', refund_path, class: 'btn btn-success', id: 'upgrade-account-link',
+      method: :post, data: { confirm: "Are you sure you want to downgrade your account. All your private wikis will be converted to public" }
     end
   end
 end

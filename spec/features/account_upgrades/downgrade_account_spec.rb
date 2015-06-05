@@ -1,12 +1,12 @@
 require 'rails_helper'
+require 'support/sign_in_user'
 
 feature "Downgrade account to standard" do
   let(:user) { create(:user) }
+  let(:premium_user) { create(:premium_user) }
+  
   scenario "is successful", js: true do
-    visit new_user_session_path
-    fill_in "user_email", with: user.email
-    fill_in "user_password", with: user.password
-    click_button "Log In"
+    sign_in_user(user)
     click_on user.email
     click_on "Upgrade Account"
     click_on "create-charge"
@@ -23,5 +23,18 @@ feature "Downgrade account to standard" do
     expect(page).to have_content("Your account has been successfully downgraded and your money refunded.", wait: 20)
     expect(User.first.role).to eq('standard')
     expect(User.first.paypal_sale_id).to eq(nil)
+  end
+  
+  scenario "all users wikis are converted to private", js: true do
+    private_wiki = create(:private_wiki, user: premium_user)
+    sale = double('sale', find_sale: true, refund_payment: true)
+    allow(Blocipedia::PaypalPayment).to receive(:new).and_return(sale)
+    
+    sign_in_user(premium_user)
+    click_on premium_user.email
+    click_on "Downgrade Account"
+    
+    expect(page).to have_content("Your account has been successfully downgraded and your money refunded.")
+    expect(Wiki.list_private_wikis_for(User.first).count).to eq(0)
   end
 end

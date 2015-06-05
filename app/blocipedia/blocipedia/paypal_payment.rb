@@ -1,4 +1,4 @@
-# Internal: Class to handle payments that use the paypal REST API for upgrading 
+# Public: Class to handle payments that use the paypal REST API for upgrading 
 # a users account to premium status.
 class Blocipedia::PaypalPayment
   require 'paypal-sdk-rest'
@@ -18,7 +18,7 @@ class Blocipedia::PaypalPayment
     @sale =         nil
   end
   
-  # Internal: Creates the payment for the default amount of $15 US for the
+  # Public: Creates the payment for the default amount of $15 US for the
   # blocipedia upgrade. It returns true if the payment was created successfully
   # or false otherwise. It also sets the return and cancel urls in the
   # payment_urls hash. @return_url and @cancel_url must be set
@@ -74,7 +74,7 @@ class Blocipedia::PaypalPayment
     end
   end
   
-  # Internal: Finds a Paypal payment using the payment_id. @payment_id must be
+  # Public: Finds a Paypal payment using the payment_id. @payment_id must be
   # set for this to complete successfully
   #
   # Examples
@@ -88,7 +88,7 @@ class Blocipedia::PaypalPayment
     @payment = Payment.find(@payment_id)
   end
   
-  # Internal: Finds a sale object from paypal
+  # Public: Finds a sale object from paypal
   #
   # Examples
   #
@@ -101,7 +101,7 @@ class Blocipedia::PaypalPayment
     @sale = Sale.find(@sale_id)
   end
   
-  # Internal: Executes an approved payment
+  # Public: Executes an approved payment
   #
   # Returns sales_id if successful and false otherwise
   def payment_execute
@@ -112,7 +112,7 @@ class Blocipedia::PaypalPayment
     end
   end
   
-  # Internal: Refunds a completed sale
+  # Public: Refunds a completed sale
   #
   # Returns true if successful and false otherwise
   def refund_payment

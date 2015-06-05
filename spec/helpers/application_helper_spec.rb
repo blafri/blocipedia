@@ -36,14 +36,28 @@ describe ApplicationHelper do
   end
   
   context "#is_link_active" do
-    scenario "returns active if link is current link" do
+    it "returns active if link is current link" do
       allow(helper).to receive(:current_page?).and_return(true)
       expect(helper.is_link_active('/test/link')).to eq('active')
     end
     
-    scenario "returns and empty string if current link is not active" do
+    it "returns and empty string if current link is not active" do
       allow(helper).to receive(:current_page?).and_return(false)
       expect(helper.is_link_active('/test/link')).to eq('')
+    end
+  end
+  
+  context "#markdown_to_html" do
+    it "returns formated html from markdown text" do
+      markdown = "# This is a *title*"
+      html = "<h1 id=\"this-is-a-title\">This is a <em>title</em></h1>\n"
+      expect(helper.markdown_to_html(markdown)).to eq(html)
+    end
+    
+    it "returns formatted html but strips all html tags entered by the user for security" do
+      markdown = "<script>This should be escaped</script>"
+      html = "<p>&lt;script&gt;This should be escaped&lt;/script&gt;</p>\n"
+      expect(helper.markdown_to_html(markdown)).to eq(html)
     end
   end
 end

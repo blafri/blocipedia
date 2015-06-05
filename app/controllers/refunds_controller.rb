@@ -8,6 +8,7 @@ class RefundsController < ApplicationController
       
       if sale.refund_payment
         current_user.update_attributes(role: 'standard', paypal_sale_id: nil)
+        Wiki.user_wikis_to_public(current_user)
         flash[:notice] = 'Your account has been successfully downgraded and your money refunded.'
       else
         flash[:error] = 'There was a problem downgrading your account. Please try again.'

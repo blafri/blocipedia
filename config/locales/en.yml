@@ -20,8 +20,19 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  activerecord:
+    errors:
+      models:
+        colaborator:
+          attributes:
+            user:
+              blank: 'does not exist'
+            wiki:
+              blank: 'does not exist'
   helpers:
     submit:
       wiki:
         create: "Save"
         update: "Update"
+      colaborator:
+        create: "Add Colaborator"

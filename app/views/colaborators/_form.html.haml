@@ -1,0 +1,6 @@
+= form_for [wiki, Colaborator.new] do |f|
+  .form-group
+    = email_field_tag 'colaborator_email', nil,
+    placeholder: 'Enter email address of collaborator', class: 'form-control'
+  .form-group
+    = f.submit class: 'btn btn-success'

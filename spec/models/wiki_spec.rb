@@ -5,9 +5,16 @@ RSpec.describe Wiki, type: :model do
   let(:premium_user) { create(:premium_user) }
   let(:user)         { create(:user) }
 
-  it { should validate_presence_of(:title) }
-  it { should validate_presence_of(:body) }
-  it { should belong_to(:user) }
+  context 'validations' do
+    it { should validate_presence_of(:title) }
+    it { should validate_presence_of(:body) }
+  end
+
+  context 'relationships' do
+    it { should belong_to(:user) }
+    it { should have_many(:colaborators) }
+    it { should have_many(:users).through(:colaborators) }
+  end
 
   context 'private wiki\'s' do
     it 'can be created successfully by premium users' do
@@ -29,18 +36,12 @@ RSpec.describe Wiki, type: :model do
     end
   end
 
-  context 'Wiki#wikis_visable_to' do
-    before do
+  context 'Wiki#public_wikis' do
+    scenario 'returns a list of all public wikis' do
       create(:wiki)
       create(:private_wiki)
-    end
-
-    it 'returns all wikis if a user is logged in' do
-      expect(Wiki.wikis_visable_to(user).count).to eq(2)
-    end
-
-    it 'returns only public wikis if a user is not logged in' do
-      expect(Wiki.wikis_visable_to(nil).count).to eq(1)
+      create(:wiki)
+      expect(Wiki.public_wikis.count).to eq(2)
     end
   end
 
@@ -60,5 +61,11 @@ RSpec.describe Wiki, type: :model do
       Wiki.user_wikis_to_public(premium_user)
       expect(Wiki.first.private).to eq(false)
     end
+  end
+
+  it "delets all wiki colaborators if the wiki is deleted" do
+    wiki = create(:private_wiki, user: premium_user)
+    create(:colaborator, user: user, wiki: wiki)
+    expect{wiki.destroy!}.to change{Colaborator.count}.from(1).to(0)
   end
 end

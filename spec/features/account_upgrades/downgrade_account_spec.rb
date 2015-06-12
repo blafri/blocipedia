@@ -27,7 +27,7 @@ feature 'Downgrade account to standard' do
     expect(User.first.paypal_sale_id).to eq(nil)
   end
 
-  scenario 'all users wikis are converted to private' do
+  scenario 'all user wikis are converted to public' do
     create(:private_wiki, user: premium_user)
     sale = double('sale', find_sale: true, refund_payment: true)
     allow(Blocipedia::PaypalPayment).to receive(:new).and_return(sale)
@@ -39,5 +39,20 @@ feature 'Downgrade account to standard' do
     expect(page).to have_content('Your account has been successfully '\
         'downgraded and your money refunded.')
     expect(Wiki.list_private_wikis_for(User.first).count).to eq(0)
+  end
+
+  scenario 'all colaborators for this wikis are removed from colaborators table' do
+    private_wiki = create(:private_wiki, user: premium_user)
+    create(:colaborator, wiki: private_wiki, user: user)
+    sale = double('sale', find_sale: true, refund_payment: true)
+    allow(Blocipedia::PaypalPayment).to receive(:new).and_return(sale)
+
+    sign_in_user(premium_user)
+    click_on premium_user.email
+    click_on 'Downgrade Account'
+
+    expect(page).to have_content('Your account has been successfully '\
+                                 'downgraded and your money refunded.')
+    expect(Wiki.first.users.count).to eq(0)
   end
 end

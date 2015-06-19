@@ -34,28 +34,4 @@ RSpec.describe User, type: :model do
     create(:colaborator, user: admin_user, wiki: wiki)
     expect{user.destroy!}.to change{wiki.users.count}.from(2).to(1)
   end
-
-  context '#list_accessible_wikis' do
-    before do
-      create(:wiki, user: user)
-      create(:private_wiki, user: premium_user)
-      create(:wiki, user: premium_user)
-      create(:private_wiki, user: admin_user)
-      create(:private_wiki)
-      create(:colaborator, user: user)
-      create(:colaborator, user: premium_user)
-    end
-
-    it 'shows correct wikis for standard user' do
-      expect(user.list_accessible_wikis.count).to eq(3)
-    end
-
-    it 'shows correct wikis for premium user' do
-      expect(premium_user.list_accessible_wikis.count).to eq(4)
-    end
-
-    it 'shows correct wikis for admin user' do
-      expect(admin_user.list_accessible_wikis.count).to eq(7)
-    end
-  end
 end

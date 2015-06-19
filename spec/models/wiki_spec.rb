@@ -68,4 +68,35 @@ RSpec.describe Wiki, type: :model do
     create(:colaborator, user: user, wiki: wiki)
     expect{wiki.destroy!}.to change{Colaborator.count}.from(1).to(0)
   end
+
+  it "deletes colaborators when a wiki is changed from private to public" do
+    wiki = create(:private_wiki)
+    create(:colaborator, wiki: wiki)
+    expect{wiki.update(private: false)}
+      .to change{Wiki.first.colaborators.count}.from(1).to(0)
+  end
+
+  context '#visable' do
+    before do
+      create(:wiki, user: user)
+      create(:private_wiki, user: premium_user)
+      create(:wiki, user: premium_user)
+      create(:private_wiki, user: admin_user)
+      create(:private_wiki)
+      create(:colaborator, user: user)
+      create(:colaborator, user: premium_user)
+    end
+
+    it 'shows correct wikis for standard user' do
+      expect(Wiki.visable(user).count).to eq(3)
+    end
+
+    it 'shows correct wikis for premium user' do
+      expect(Wiki.visable(premium_user).count).to eq(4)
+    end
+
+    it 'shows correct wikis for admin user' do
+      expect(Wiki.visable(admin_user).count).to eq(7)
+    end
+  end
 end

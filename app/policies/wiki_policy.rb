@@ -24,8 +24,7 @@ class WikiPolicy < ApplicationPolicy
     end
 
     def resolve
-      return scope.public_wikis unless user
-      user.list_accessible_wikis
+      scope.visable(user)
     end
   end
 end

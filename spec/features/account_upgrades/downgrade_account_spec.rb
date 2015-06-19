@@ -28,7 +28,7 @@ feature 'Downgrade account to standard' do
   end
 
   scenario 'all user wikis are converted to public' do
-    create(:private_wiki, user: premium_user)
+    3.times { create(:private_wiki, user: premium_user) }
     sale = double('sale', find_sale: true, refund_payment: true)
     allow(Blocipedia::PaypalPayment).to receive(:new).and_return(sale)
 
@@ -42,8 +42,10 @@ feature 'Downgrade account to standard' do
   end
 
   scenario 'all colaborators for this wikis are removed from colaborators table' do
-    private_wiki = create(:private_wiki, user: premium_user)
-    create(:colaborator, wiki: private_wiki, user: user)
+    wikis = Array.new
+    3.times { wikis << create(:private_wiki, user: premium_user) }
+    wikis.each { |wiki| create(:colaborator, wiki: wiki) }
+
     sale = double('sale', find_sale: true, refund_payment: true)
     allow(Blocipedia::PaypalPayment).to receive(:new).and_return(sale)
 

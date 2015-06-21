@@ -1,0 +1,5 @@
+%p 
+  = colaborator.user.email
+  %span
+    = link_to 'Remove', wiki_colaborator_path(@wiki, colaborator),
+      method: :delete

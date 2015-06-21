@@ -7,7 +7,9 @@ Rails.application.routes.draw do
          to: 'users#password_reset', as: :reset_user_password)
   end
 
-  resources :wikis
+  resources :wikis do
+    resources :colaborators, only: [:create, :destroy]
+  end
 
   resource :charge, only: [:new, :create]
   resource :refund, only: :create

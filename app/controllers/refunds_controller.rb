@@ -5,7 +5,7 @@ class RefundsController < ApplicationController
     else
       sale = Blocipedia::PaypalPayment.new(sale_id: current_user.paypal_sale_id)
       sale.find_sale
-      
+
       if sale.refund_payment
         current_user.update_attributes(role: 'standard', paypal_sale_id: nil)
         Wiki.user_wikis_to_public(current_user)
